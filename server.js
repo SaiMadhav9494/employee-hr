@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const whiteList = ['http://localhost:4200', 'https://employee-hr-app.herokuapp.com/'];
+const whiteList = ['http://localhost:4200', 'https://employee-hr-app.herokuapp.com'];
 app.use(cors({
     origin(origin, callback) {
         console.log('the origin ', origin);
