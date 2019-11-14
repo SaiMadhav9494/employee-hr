@@ -14,7 +14,7 @@ import { Employee } from './models/employee.model';
 export class AppComponent implements OnInit {
   employees: Array<Employee> = [];
   form: FormGroup;
-  serverAddress = 'http://localhost:8080';
+  serverAddress = 'https://employee-hr-app.herokuapp.com';
 
   constructor(private formBuilder: FormBuilder, 
     private http: HttpClient) {}
