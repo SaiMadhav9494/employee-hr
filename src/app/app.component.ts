@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   employees: Array<Employee> = [];
   form: FormGroup;
   serverAddress = 'https://employee-hr-app.herokuapp.com';
+  // serverAddress = 'http://localhost:8080';
 
   constructor(private formBuilder: FormBuilder, 
     private http: HttpClient) {}
@@ -50,15 +51,18 @@ export class AppComponent implements OnInit {
     }
 
     const deductions = [];
-    let takeHomePay = this.inputForm.grossPay.value - (this.inputForm.grossPay.value * (17/100));
+    let takeHomePay = this.inputForm.grossPay.value;
+    // Assuming that the company pays 10000 out of the 19000 and employee pays the remaining.
+    if(this.inputForm.forZeroOneK.value) {
+      deductions.push('401k');
+      takeHomePay -= 9000;
+    }
+     
+    takeHomePay= takeHomePay - (takeHomePay * (17/100));
 
     if(this.inputForm.insurance.value) {
       deductions.push('Medical insurance');
       takeHomePay -= takeHomePay * 10/100;
-    }
-
-    if(this.inputForm.forZeroOneK.value) {
-      deductions.push('401k');
     }
 
     console.log(deductions, takeHomePay);
